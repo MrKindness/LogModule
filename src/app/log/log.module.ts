@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { logGeneral } from './components/logGeneral/logGeneral.component';
-import { MatSnackBar } from './components/MatSnackBar/MatSnackBar.component';
+import {LogGeneralComponent } from './components/logGeneral/logGeneral.component';
+import {MatSnackBarComponent } from './components/MatSnackBar/MatSnackBar.component';
 
 @NgModule({
-  declarations: [logGeneral, MatSnackBar],
+  declarations: [LogGeneralComponent, MatSnackBarComponent],
   imports: [],
   providers: [],
-  exports: [logGeneral, MatSnackBar]
+  exports: [LogGeneralComponent, MatSnackBarComponent],
 })
 export class LogModule {}

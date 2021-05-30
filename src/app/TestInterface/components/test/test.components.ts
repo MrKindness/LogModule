@@ -1,8 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'test-component',
+  selector: 'app-test-component',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.scss'],
 })
-export class TestComponent {}
+export class TestComponent {
+  @Output() NewNotification = new EventEmitter();
+
+  ButtonClick(): void{
+    this.NewNotification.emit();
+  }
+}

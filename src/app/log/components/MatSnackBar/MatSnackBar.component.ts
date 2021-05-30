@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'MatSnackBar-component',
+  selector: 'app-mat-snack-bar',
   templateUrl: './MatSnackBar.component.html',
   styleUrls: ['./MatSnackBar.component.scss'],
 })
-export class MatSnackBar {}
+
+export class MatSnackBarComponent {}
