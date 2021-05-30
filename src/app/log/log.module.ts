@@ -6,5 +6,6 @@ import { MatSnackBar } from './components/MatSnackBar/MatSnackBar.component';
   declarations: [logGeneral, MatSnackBar],
   imports: [],
   providers: [],
+  exports: [logGeneral, MatSnackBar]
 })
 export class LogModule {}
