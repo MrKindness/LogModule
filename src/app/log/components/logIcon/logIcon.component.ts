@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatSnackBarService } from '../../services/MatSnackBar.service';
+import { LogService } from '../../services/LogService';
 
 @Component({
   selector: 'app-log-icon',
@@ -7,10 +7,10 @@ import { MatSnackBarService } from '../../services/MatSnackBar.service';
   styleUrls: ['./logIcon.component.scss'],
 })
 export class LogIconComponent {
-  constructor(private NotificationService: MatSnackBarService) {
+  constructor(private NotificationService: LogService) {
     this.NotificationService.NewNotication.subscribe({
       next: (v) => {
-        console.log('hello from logIcon');
+        console.log('hello from logIcon!');
       },
     });
   }

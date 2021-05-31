@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatSnackBarService } from '../log/services/MatSnackBar.service';
+import { LogService } from '../log/services/LogService';
 import { TestComponent } from './components/test/test.components';
 
 @NgModule({

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LogService } from '../../services/LogService';
 
 @Component({
   selector: 'app-mat-snack-bar',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./MatSnackBar.component.scss'],
 })
 
-export class MatSnackBarComponent {}
+export class MatSnackBarComponent {
+  constructor(private EventService: LogService){}
+}

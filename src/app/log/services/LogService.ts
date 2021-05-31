@@ -1,6 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 
-export class MatSnackBarService {
+export class LogService {
   NewNotication = new Subject();
 
   ShowNotification(): void {

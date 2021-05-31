@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatSnackBarService } from './log/services/MatSnackBar.service';
+import { LogService } from './log/services/LogService';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { MatSnackBarService } from './log/services/MatSnackBar.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private NotificatonService: MatSnackBarService) {}
+  constructor(private NotificatonService: LogService) {}
 
   title = 'LogModule';
 
