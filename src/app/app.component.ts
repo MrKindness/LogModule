@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatSnackBarService } from './log/services/MatSnackBar.service';
 
 @Component({
   selector: 'app-root',
@@ -6,9 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  constructor(private NotificatonService: MatSnackBarService) {}
+
   title = 'LogModule';
 
   NewNotification(): void {
-    
+    this.NotificatonService.ShowNotification();
   }
 }

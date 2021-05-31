@@ -1,11 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {LogGeneralComponent } from './components/logGeneral/logGeneral.component';
-import {MatSnackBarComponent } from './components/MatSnackBar/MatSnackBar.component';
+import { LogIconComponent } from './components/logIcon/logIcon.component';
+import { MatSnackBarComponent } from './components/MatSnackBar/MatSnackBar.component';
+import { MatSnackBarService } from './services/MatSnackBar.service';
 
 @NgModule({
-  declarations: [LogGeneralComponent, MatSnackBarComponent],
-  imports: [],
-  providers: [],
-  exports: [LogGeneralComponent, MatSnackBarComponent],
+  declarations: [LogIconComponent, MatSnackBarComponent],
+  imports: [CommonModule],
+  providers: [MatSnackBarService],
+  exports: [LogIconComponent],
 })
 export class LogModule {}
