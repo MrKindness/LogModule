@@ -1,13 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { LogIconComponent } from './components/logIcon/logIcon.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSnackBarComponent } from './components/MatSnackBar/MatSnackBar.component';
+import { NewOrderComponent } from './components/NewOrder/NewOrder.component';
+import { OrderChangedComponent } from './components/OrderChanged/OrderChanged.component';
 import { LogService } from './services/LogService';
 
 @NgModule({
-  declarations: [LogIconComponent, MatSnackBarComponent],
-  imports: [CommonModule],
+  declarations: [
+    MatSnackBarComponent,
+    NewOrderComponent,
+    OrderChangedComponent,
+  ],
+  imports: [CommonModule, MatSnackBarModule],
   providers: [LogService],
-  exports: [LogIconComponent],
+  exports: [MatSnackBarComponent],
 })
 export class LogModule {}

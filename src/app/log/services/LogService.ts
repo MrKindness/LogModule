@@ -1,9 +1,10 @@
 import { Observable, Subject } from 'rxjs';
+import { SnackBarType } from '../types/SnackBarType';
 
 export class LogService {
-  NewNotication = new Subject();
+  NewNotication = new Subject<SnackBarType>();
 
-  ShowNotification(): void {
-    this.NewNotication.next();
+  ShowNotification(Type: SnackBarType): void {
+    this.NewNotication.next(Type);
   }
 }

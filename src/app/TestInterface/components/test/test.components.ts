@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { SnackBarType } from 'src/app/log/types/SnackBarType';
 
 @Component({
   selector: 'app-test-component',
@@ -6,9 +7,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./test.component.scss'],
 })
 export class TestComponent {
-  @Output() NewNotification = new EventEmitter();
+  @Output() NotificationEmitter = new EventEmitter();
 
-  ButtonClick(): void{
-    this.NewNotification.emit();
+  NewOrderClick(): void {
+    this.NotificationEmitter.emit(SnackBarType.NewOrder);
+  }
+
+  OrderChangedClick(): void {
+    this.NotificationEmitter.emit(SnackBarType.OrderChanged);
   }
 }
