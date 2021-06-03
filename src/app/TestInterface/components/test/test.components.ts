@@ -16,4 +16,16 @@ export class TestComponent {
   OrderChangedClick(): void {
     this.NotificationEmitter.emit(SnackBarType.OrderChanged);
   }
+
+  WarningClick(): void {
+    this.NotificationEmitter.emit(SnackBarType.Warning);
+  }
+
+  ErrorClick(): void {
+    this.NotificationEmitter.emit(SnackBarType.Error);
+  }
+
+  InfoClick(): void {
+    this.NotificationEmitter.emit(SnackBarType.Info);
+  }
 }

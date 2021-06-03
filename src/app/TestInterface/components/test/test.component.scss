@@ -4,6 +4,13 @@
   vertical-align: top;
   
   .TestButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-top: 10px;
+
     font-size: 12pt;
     border: 0ch;
     height: 40pt;

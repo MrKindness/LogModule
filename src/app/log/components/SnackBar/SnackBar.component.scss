@@ -1,0 +1,26 @@
+$size: 25px;
+
+.Container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Text {
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.Icon {
+  width: $size;
+  height: $size;
+  background-size: contain;
+  border: 0px;
+}
+
+.Button {
+  color: rgb(66,133,244);
+  text-decoration: underline;
+  cursor: pointer;
+}

@@ -1,4 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+$BaseFontColor: rgb(247, 246, 212);
+
+%SnackBarTemplate {
+  background: rgb(56, 53, 53);
+  color: $BaseFontColor;
+}
+
+.NewOrder.mat-snack-bar-container {
+  background: rgb(8, 87, 8);
+  color: $BaseFontColor;
+
+  .Icon {
+    background: url(./assets/cart-plus-solid.svg) no-repeat top;
+  }
+}
+
+.OrderChanged.mat-snack-bar-container {
+  @extend %SnackBarTemplate;
+
+  .Icon {
+    background: url(./assets/sync-alt-solid.svg) no-repeat top;
+  }
+}
+
+.Warning.mat-snack-bar-container {
+  background: rgb(255, 255, 127);
+  color: black;
+
+  .Icon {
+    background: url(./assets/exclamation-triangle-solid.svg) no-repeat top;
+  }
+}
+
+.Error.mat-snack-bar-container {
+  background: rgb(145, 1, 1);
+  color: $BaseFontColor;
+
+  .Icon {
+    background: url(./assets/minus-circle-solid.svg) no-repeat top;
+  }
+}
+
+.Info.mat-snack-bar-container {
+  @extend %SnackBarTemplate;
+  
+  .Icon {
+    background: url(./assets/info-solid.svg) no-repeat top;
+  }
+}
