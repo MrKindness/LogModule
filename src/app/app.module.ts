@@ -7,7 +7,6 @@ import { LogModule } from './log/log.module';
 import { LogService } from './log/services/LogService';
 import { TestInteraceModule } from './TestInterface/TestInterface.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSnackBarComponent } from './log/components/MatSnackBar/MatSnackBar.component';
 
 @NgModule({
   declarations: [AppComponent],

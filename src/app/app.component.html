@@ -1,2 +1,9 @@
-<app-test-component (NotificationEmitter)="OrderNotification($event)"></app-test-component>
-<app-mat-snack-bar class="LogMain"></app-mat-snack-bar>
+<div class="Container">
+  <app-test-component
+    class="TestComponent"
+    (NotificationEmitter)="OrderNotification($event)"
+  ></app-test-component>
+  <app-mat-snack-bar class="LogMain"></app-mat-snack-bar>
+</div>
+
+<router-outlet></router-outlet>

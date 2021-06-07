@@ -1,28 +1,39 @@
-$size: 40px;
+$size: 30pt;
 
 .Container {
-  display: inline-block;
-  width: $size;
-  height: $size;
+  display: flex;
 
-  .NotificationHistory {
-    z-index: 0;
+  .NotificationContainer {
+    margin-right: 20px;
+    margin-left: 20px;
+    .NotificationHistory {
+      z-index: 0;
+      width: $size;
+      height: $size;
+      background: url(../../../../assets/bell-solid.svg) no-repeat top;
+      background-size: contain;
+      border: 0px;
+      cursor: pointer;
+    }
+
+    .NotificationIndicator {
+      z-index: 1;
+      width: $size/2.4;
+      height: $size/2.4;
+      background-color: rgb(230, 36, 36);
+      border-radius: 50%;
+      position: relative;
+      left: 22px;
+      bottom: 42px;
+      cursor: pointer;
+    }
+  }
+  .HomeButton {
     width: $size;
     height: $size;
-    background: url(../../../../assets/notification.png) no-repeat top;
+    background: url(../../../../assets/home-solid.svg) no-repeat top;
     background-size: contain;
     border: 0px;
-  }
-
-  .NotificationIndicator {
-    z-index: 1;
-    width: $size/2.4;
-    height: $size/2.4;
-    display: inline-block;
-    background-color: rgb(230, 36, 36);
-    border-radius: 50%;
-    position: relative;
-    left: 22px;
-    bottom: 42px;
+    cursor: pointer;
   }
 }

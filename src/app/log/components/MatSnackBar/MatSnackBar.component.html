@@ -1,4 +1,11 @@
 <div class="Container">
-  <button class="NotificationHistory"></button>
-  <div *ngIf="AreNewNotifications" class="NotificationIndicator"></div>
+  <div class="NotificationContainer">
+    <button (click)="HistoryClick()" class="NotificationHistory"></button>
+    <div
+      (click)="HistoryClick()"
+      *ngIf="AreNewNotifications"
+      class="NotificationIndicator"
+    ></div>
+  </div>
+  <button (click)="HomeClick()" class="HomeButton"></button>
 </div>

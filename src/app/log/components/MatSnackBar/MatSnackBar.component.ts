@@ -3,6 +3,7 @@ import { LogService } from '../../services/LogService';
 import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { SnackBarType } from '../../types/SnackBarType';
 import { SnackBarComponent } from '../SnackBar/SnackBar.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mat-snack-bar',
@@ -11,7 +12,11 @@ import { SnackBarComponent } from '../SnackBar/SnackBar.component';
 })
 export class MatSnackBarComponent {
   AreNewNotifications = true;
-  constructor(private EventService: LogService, private SnackBar: MatSnackBar) {
+  constructor(
+    private EventService: LogService,
+    private SnackBar: MatSnackBar,
+    private router: Router
+  ) {
     this.EventService.NewNotication.subscribe({
       next: (type: SnackBarType) => {
         const BarData = { message: '', buttonText: 'Подробнее' };
@@ -43,5 +48,13 @@ export class MatSnackBarComponent {
         });
       },
     });
+  }
+
+  HistoryClick(): void {
+    this.router.navigate(['NotificationHistory']);
+  }
+
+  HomeClick(): void {
+    this.router.navigate(['/']);
   }
 }
