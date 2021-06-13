@@ -1,0 +1,49 @@
+$BaseFontColor: rgb(0, 0, 0);
+
+%SnackBarTemplate {
+  background: rgb(185, 185, 185);
+  color: $BaseFontColor;
+}
+
+.NewOrder.mat-snack-bar-container {
+  background: rgb(68, 235, 68);
+  color: $BaseFontColor;
+
+  .Icon {
+    background: url(\src\app\log\assets\cart-plus-solid.svg) no-repeat top;
+  }
+}
+
+.OrderChanged.mat-snack-bar-container {
+  @extend %SnackBarTemplate;
+
+  .Icon {
+    background: url(\src\app\log\assets\sync-alt-solid.svg) no-repeat top;
+  }
+}
+
+.Warning.mat-snack-bar-container {
+  background: rgb(255, 255, 0);
+  color: $BaseFontColor;
+
+  .Icon {
+    background: url(\src\app\log\assets\exclamation-triangle-solid.svg) no-repeat top;
+  }
+}
+
+.Error.mat-snack-bar-container {
+  background: rgb(238, 21, 21);
+  color: $BaseFontColor;
+
+  .Icon {
+    background: url(\src\app\log\assets\minus-circle-solid.svg) no-repeat top;
+  }
+}
+
+.Info.mat-snack-bar-container {
+  @extend %SnackBarTemplate;
+
+  .Icon {
+    background: url(\src\app\log\assets\info-solid.svg) no-repeat top;
+  }
+}

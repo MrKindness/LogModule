@@ -1,11 +1,10 @@
-import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
-import { SnackBarType } from '../types/SnackBarType';
+import { Subject } from 'rxjs';
+import { SnackBarNotification } from '../types/SnackBarType';
 
 export class LogService {
-  NewNotication = new Subject<SnackBarType>();
+  NewNotication = new Subject<SnackBarNotification>();
 
-  ShowNotification(Type: SnackBarType): void {
+  ShowNotification(Type: SnackBarNotification): void {
     this.NewNotication.next(Type);
   }
 }

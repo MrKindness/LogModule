@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { SnackBarType } from 'src/app/log/types/SnackBarType';
+import {
+  SnackBarNotification,
+  SnackBarType,
+} from 'src/app/log/types/SnackBarType';
 
 @Component({
   selector: 'app-test-component',
@@ -7,25 +10,42 @@ import { SnackBarType } from 'src/app/log/types/SnackBarType';
   styleUrls: ['./test.component.scss'],
 })
 export class TestComponent {
-  @Output() NotificationEmitter = new EventEmitter();
+  @Output() NotificationEmitter: EventEmitter<SnackBarNotification> =
+    new EventEmitter<SnackBarNotification>();
+
+  EventData: SnackBarNotification = {
+    type: SnackBarType.Error,
+    time: Date.now(),
+    data: '',
+  };
 
   NewOrderClick(): void {
-    this.NotificationEmitter.emit(SnackBarType.NewOrder);
+    this.EventData.type = SnackBarType.NewOrder;
+    this.EventData.data = 'Новый Заказ!';
+    this.NotificationEmitter.emit(this.EventData);
   }
 
   OrderChangedClick(): void {
-    this.NotificationEmitter.emit(SnackBarType.OrderChanged);
+    this.EventData.type = SnackBarType.OrderChanged;
+    this.EventData.data = 'Заказ изменен!';
+    this.NotificationEmitter.emit(this.EventData);
   }
 
   WarningClick(): void {
-    this.NotificationEmitter.emit(SnackBarType.Warning);
+    this.EventData.type = SnackBarType.Warning;
+    this.EventData.data = 'Внимание!';
+    this.NotificationEmitter.emit(this.EventData);
   }
 
   ErrorClick(): void {
-    this.NotificationEmitter.emit(SnackBarType.Error);
+    this.EventData.type = SnackBarType.Error;
+    this.EventData.data = 'Произошла ошибка!';
+    this.NotificationEmitter.emit(this.EventData);
   }
 
   InfoClick(): void {
-    this.NotificationEmitter.emit(SnackBarType.Info);
+    this.EventData.type = SnackBarType.Info;
+    this.EventData.data = 'Информация!';
+    this.NotificationEmitter.emit(this.EventData);
   }
 }

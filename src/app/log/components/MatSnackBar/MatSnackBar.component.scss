@@ -10,7 +10,7 @@ $size: 30pt;
       z-index: 0;
       width: $size;
       height: $size;
-      background: url(../../../../assets/bell-solid.svg) no-repeat top;
+      background: url(../../assets/bell-solid.svg) no-repeat top;
       background-size: contain;
       border: 0px;
       cursor: pointer;
@@ -31,7 +31,7 @@ $size: 30pt;
   .HomeButton {
     width: $size;
     height: $size;
-    background: url(../../../../assets/home-solid.svg) no-repeat top;
+    background: url(../../assets/home-solid.svg) no-repeat top;
     background-size: contain;
     border: 0px;
     cursor: pointer;

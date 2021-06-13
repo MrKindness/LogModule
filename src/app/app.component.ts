@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LogService } from './log/services/LogService';
-import { SnackBarType } from './log/types/SnackBarType';
+import { SnackBarNotification, SnackBarType } from './log/types/SnackBarType';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,7 @@ export class AppComponent {
 
   title = 'LogModule';
 
-  OrderNotification(type: SnackBarType): void {
+  OrderNotification(type: SnackBarNotification): void {
     this.NotificatonService.ShowNotification(type);
   }
 }
