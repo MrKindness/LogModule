@@ -7,12 +7,20 @@ export enum SnackBarType {
 }
 
 export interface SnackBarNotification {
-  type: SnackBarType;
+  NotificationType: SnackBarType;
   data: string;
   time: number;
 }
 
-export interface SnackBarInfo {
+export interface SnackBarNotificationsArray {
+  array: SnackBarNotification[];
+}
+
+export interface DisplayStartPosition {
+  StartPosition: number;
+}
+
+interface SnackBarInfo {
   TextColor: number[];
   BackgroundColor: number[];
   IconPath: string;
@@ -54,9 +62,9 @@ export const SnackBarsTypeData = new Map<number, SnackBarInfo>([
   [
     SnackBarType.Warning,
     {
-        TextColor: [0, 0, 0],
-        BackgroundColor: [255, 255, 0],
-        IconPath: '../../assets/sync-alt-solid.svg',
+      TextColor: [0, 0, 0],
+      BackgroundColor: [255, 255, 0],
+      IconPath: '../../assets/sync-alt-solid.svg',
     },
   ],
 ]);

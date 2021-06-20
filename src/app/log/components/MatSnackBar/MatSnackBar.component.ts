@@ -1,34 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { LogService } from '../../services/LogService';
-import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarNotification, SnackBarType } from '../../types/SnackBarType';
 import { SnackBarComponent } from '../SnackBar/SnackBar.component';
 import { Router } from '@angular/router';
+import { select, State, Store } from '@ngrx/store';
+import { NewNotificationAction } from '../../store/actions/notifications.actions';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import {
+  NotificationsListSelector,
+  AreNewNotificationsSelector,
+  NotificationsState,
+} from '../../store/reducers/notifications.reducer';
 
 @Component({
   selector: 'app-mat-snack-bar',
   templateUrl: './MatSnackBar.component.html',
   styleUrls: ['./MatSnackBar.component.scss'],
 })
-export class MatSnackBarComponent {
-  AreNewNotifications = true;
+export class MatSnackBarComponent implements OnDestroy {
+  AreNewNotifications$: Observable<boolean>;
+  EventserviceSubs$;
+
   constructor(
     private EventService: LogService,
     private SnackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private store: Store,
   ) {
-    this.EventService.NewNotication.subscribe({
+
+    this.AreNewNotifications$ = this.store.pipe(
+      select(AreNewNotificationsSelector)
+    );
+    this.EventserviceSubs$ = this.EventService.NewNotication.subscribe({
       next: (notification: SnackBarNotification) => {
+        this.store.dispatch(NewNotificationAction(notification));
         this.SnackBar.openFromComponent(SnackBarComponent, {
           duration: 3000,
           horizontalPosition: 'end',
           verticalPosition: 'top',
           data: { message: notification.data, buttonText: 'Подробнее' },
-          panelClass: SnackBarType[notification.type],
+          panelClass: SnackBarType[notification.NotificationType],
         });
       },
       error: () => {},
     });
+  }
+  ngOnDestroy(): void {
+    this.EventserviceSubs$.unsubscribe();
   }
 
   HistoryClick(): void {

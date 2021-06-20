@@ -14,37 +14,37 @@ export class TestComponent {
     new EventEmitter<SnackBarNotification>();
 
   EventData: SnackBarNotification = {
-    type: SnackBarType.Error,
+    NotificationType: SnackBarType.Error,
     time: Date.now(),
     data: '',
   };
 
   NewOrderClick(): void {
-    this.EventData.type = SnackBarType.NewOrder;
+    this.EventData.NotificationType = SnackBarType.NewOrder;
     this.EventData.data = 'Новый Заказ!';
     this.NotificationEmitter.emit(this.EventData);
   }
 
   OrderChangedClick(): void {
-    this.EventData.type = SnackBarType.OrderChanged;
+    this.EventData.NotificationType = SnackBarType.OrderChanged;
     this.EventData.data = 'Заказ изменен!';
     this.NotificationEmitter.emit(this.EventData);
   }
 
   WarningClick(): void {
-    this.EventData.type = SnackBarType.Warning;
+    this.EventData.NotificationType = SnackBarType.Warning;
     this.EventData.data = 'Внимание!';
     this.NotificationEmitter.emit(this.EventData);
   }
 
   ErrorClick(): void {
-    this.EventData.type = SnackBarType.Error;
+    this.EventData.NotificationType = SnackBarType.Error;
     this.EventData.data = 'Произошла ошибка!';
     this.NotificationEmitter.emit(this.EventData);
   }
 
   InfoClick(): void {
-    this.EventData.type = SnackBarType.Info;
+    this.EventData.NotificationType = SnackBarType.Info;
     this.EventData.data = 'Информация!';
     this.NotificationEmitter.emit(this.EventData);
   }

@@ -3,7 +3,7 @@
     <button (click)="HistoryClick()" class="NotificationHistory"></button>
     <div
       (click)="HistoryClick()"
-      *ngIf="AreNewNotifications"
+      *ngIf="AreNewNotifications$ | async"
       class="NotificationIndicator"
     ></div>
   </div>

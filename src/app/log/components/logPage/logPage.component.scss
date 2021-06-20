@@ -11,28 +11,28 @@ $size: 30px;
   border: 0px;
 }
 
-.NewOrderIcon {
+.NewOrder {
   @extend %IconTemplate;
   background: url(\src\app\log\assets\cart-plus-solid.svg) no-repeat top;
 }
 
-.OrderChangedIcon {
+.OrderChanged {
   @extend %IconTemplate;
   background: url(\src\app\log\assets\sync-alt-solid.svg) no-repeat top;
 }
 
-.WarningIcon {
+.Warning {
   @extend %IconTemplate;
   background: url(\src\app\log\assets\exclamation-triangle-solid.svg) no-repeat
     top;
 }
 
-.ErrorIcon {
+.Error {
   @extend %IconTemplate;
   background: url(\src\app\log\assets\minus-circle-solid.svg) no-repeat top;
 }
 
-.InfoIcon {
+.Info {
   @extend %IconTemplate;
   background: url(\src\app\log\assets\info-solid.svg) no-repeat top;
 }
