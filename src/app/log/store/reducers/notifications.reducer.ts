@@ -41,6 +41,7 @@ export const NotificationsReducer = createReducer(
     };
   }),
   on(OpenNotificationsPageAction, (state) => {
+    console.log('in reducer open page');
     return {
       ...state,
       AreNewNotifications: false,

@@ -15,7 +15,7 @@ export const OpenNotificationsPageAction = createAction(
 );
 
 export const CloseNotificationPage = createAction(
-  '[NOTIFICATIONS] CloseNotificationPage'
+  '[NOTIFICATIONS] NotificationPageClosed'
 );
 
 export const DownloadedNotificationsAction = createAction(

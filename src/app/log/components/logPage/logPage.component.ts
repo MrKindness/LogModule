@@ -33,7 +33,7 @@ export class LogPageComponent implements OnDestroy {
     private store: Store,
     private state: State<NotificationsState>
   ) {
-    console.log(this.state.getValue().Notifications.NotificationsList);
+    console.log('component');
     this.store.dispatch(OpenNotificationsPageAction());
     let i = 0;
     for (

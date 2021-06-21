@@ -4,14 +4,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarNotification, SnackBarType } from '../../types/SnackBarType';
 import { SnackBarComponent } from '../SnackBar/SnackBar.component';
 import { Router } from '@angular/router';
-import { select, State, Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { NewNotificationAction } from '../../store/actions/notifications.actions';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  NotificationsListSelector,
   AreNewNotificationsSelector,
-  NotificationsState,
 } from '../../store/reducers/notifications.reducer';
 
 @Component({
@@ -21,7 +19,7 @@ import {
 })
 export class MatSnackBarComponent implements OnDestroy {
   AreNewNotifications$: Observable<boolean>;
-  EventserviceSubs$;
+  EventserviceSub$;
 
   constructor(
     private EventService: LogService,
@@ -33,7 +31,7 @@ export class MatSnackBarComponent implements OnDestroy {
     this.AreNewNotifications$ = this.store.pipe(
       select(AreNewNotificationsSelector)
     );
-    this.EventserviceSubs$ = this.EventService.NewNotication.subscribe({
+    this.EventserviceSub$ = this.EventService.NewNotication.subscribe({
       next: (notification: SnackBarNotification) => {
         this.store.dispatch(NewNotificationAction(notification));
         this.SnackBar.openFromComponent(SnackBarComponent, {
@@ -48,7 +46,7 @@ export class MatSnackBarComponent implements OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    this.EventserviceSubs$.unsubscribe();
+    this.EventserviceSub$.unsubscribe();
   }
 
   HistoryClick(): void {

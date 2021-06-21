@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
-import { LogReducers } from './log/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +25,7 @@ import { LogReducers } from './log/store';
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot()
   ],
   providers: [LogService],
   bootstrap: [AppComponent],
