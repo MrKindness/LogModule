@@ -1,0 +1,40 @@
+$size: 30pt;
+
+.Container {
+  display: flex;
+
+  .NotificationContainer {
+    margin-right: 20px;
+    margin-left: 20px;
+    .NotificationsPageButton {
+      z-index: 0;
+      width: $size;
+      height: $size;
+      background: url(\src\app\notifications\assets\bell-solid.svg) no-repeat
+        top;
+      background-size: contain;
+      border: 0px;
+      cursor: pointer;
+    }
+
+    .NotificationIndicator {
+      z-index: 1;
+      width: $size/2.4;
+      height: $size/2.4;
+      background-color: rgb(230, 36, 36);
+      border-radius: 50%;
+      position: relative;
+      left: 22px;
+      bottom: 42px;
+      cursor: pointer;
+    }
+  }
+  .HomeButton {
+    width: $size;
+    height: $size;
+    background: url(\src\app\notifications\assets\home-solid.svg) no-repeat top;
+    background-size: contain;
+    border: 0px;
+    cursor: pointer;
+  }
+}

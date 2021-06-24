@@ -1,0 +1,20 @@
+.Container {
+  display: flex;
+  position: relative;
+  vertical-align: top;
+
+  .TestButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 12pt;
+    border: 0ch;
+    height: 30pt;
+    width: 150pt;
+
+    &:hover {
+      background-color: rgb(226, 226, 226);
+    }
+  }
+}

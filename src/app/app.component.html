@@ -1,0 +1,9 @@
+<div class="Container">
+  <app-test-component
+    class="TestComponent"
+    (NotificationEmitter)="OrderNotification($event)"
+  ></app-test-component>
+  <app-notifications-panel class="LogMain"></app-notifications-panel>
+</div>
+
+<router-outlet></router-outlet>
