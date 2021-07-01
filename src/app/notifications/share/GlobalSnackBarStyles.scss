@@ -1,0 +1,48 @@
+@import "/src/app/notifications/share/IconsTemplate.scss";
+
+$BaseFontColor: rgb(0, 0, 0);
+
+%SnackBarTemplate {
+  background: rgb(185, 185, 185);
+  color: $BaseFontColor;
+}
+
+.NewOrder.mat-snack-bar-container {
+  background: rgb(68, 235, 68);
+  color: $BaseFontColor;
+
+  .Icon {
+    @extend %NewOrderIconTemplate;
+  }
+}
+
+.OrderChanged.mat-snack-bar-container {
+  @extend %SnackBarTemplate;
+  .Icon {
+    @extend %OrderChangedIconTemplate;
+  }
+}
+
+.Warning.mat-snack-bar-container {
+  .Icon {
+    @extend %WarningIconTemplate;
+  }
+  background: rgb(255, 255, 0);
+  color: $BaseFontColor;
+}
+
+.Error.mat-snack-bar-container {
+  .Icon {
+    @extend %ErrorIconTemplate;
+  }
+
+  background: rgb(238, 21, 21);
+  color: $BaseFontColor;
+}
+
+.Info.mat-snack-bar-container {
+  .Icon {
+    @extend %InfoIconTemplate;
+  }
+  @extend %SnackBarTemplate;
+}

@@ -19,6 +19,6 @@ export class MatSnackBarComponent {
 
   Action(): void {
     this.snackBarRef.dismiss();
-    this.router.navigate(['NotificationHistory']);
+    this.router.navigate(['NotificationsPage']);
   }
 }

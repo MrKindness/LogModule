@@ -12,6 +12,13 @@ export interface MatSnackBarNotification {
   time: number;
 }
 
+export interface MatSnackBarNotificationServer {
+  NotificationType: MatSnackBarType;
+  data: string;
+  time: number;
+  id: number;
+}
+
 export interface MatSnackBarArray {
   array: MatSnackBarNotification[];
 }

@@ -1,16 +1,25 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { NotificationsService } from '../../services/NotificationsService';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Store, select } from '@ngrx/store';
 import {
-  CloseNotificationPage,
+  CloseNotificationPageAction,
   OpenNotificationsPageAction,
 } from '../../store/actions/notifications.actions';
-import { NotificationsListSelector } from '../../store/reducers/notifications.reducer';
+import { filter, map, subscribeOn } from 'rxjs/operators';
+import {
+  MatSnackBarNotification,
+  MatSnackBarNotificationServer,
+  MatSnackBarType,
+} from '../../types/MatSnackBarType';
+import {
+  LastDownloadedNotificationsSelector,
+  NewNotificationSelector,
+  NotificationsSelector,
+} from '../../store/selectors/notifications.selector';
+import { Observable, Subscription } from 'rxjs';
+import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 
-interface TableElement {
+export interface TableElement {
   TypeClass: string;
   data: string;
   time: number;
@@ -21,41 +30,65 @@ interface TableElement {
   templateUrl: './NotificationsPage.component.html',
   styleUrls: ['./NotificationsPage.component.scss'],
 })
-export class NotificationsPageComponent implements OnDestroy {
-  @ViewChild(MatTable) table: any;
+export class NotificationsPageComponent implements OnDestroy, OnInit {
+  @ViewChild(MatTable, { static: true }) table: any;
   DataArray: TableElement[] = [];
   displayedColumns: string[] = ['Icon', 'Data', 'Time'];
-  Subscription: any;
-  DisplayAmount = 5;
+  Subs: Subscription[] = [];
 
-  constructor(
-    private NotificationService: NotificationsService,
-    private store: Store
-    )
-  {
-    this.store.dispatch(OpenNotificationsPageAction());
-    this.Subscription = this.store.pipe(
-      select(NotificationsListSelector),
-      map((event) => {
-        console.log('From log page');
-        console.log(event);
-      })
+  constructor(private store: Store) {}
+  ngOnInit(): void {
+    this.Subs.push(
+      this.store
+        .pipe(
+          select(NewNotificationSelector),
+          filter((event) => event !== undefined),
+          map((notification) => {
+            this.DataArray = [
+              ...this.TransformInTableElement([notification]),
+              ...this.DataArray,
+            ];
+          })
+        )
+        .subscribe()
     );
 
-    // this.Subscription = this.NotificationService.NewNotication.subscribe({
-    //   next: (Notification: SnackBarNotification) => {
-    //     this.DataArray.unshift({
-    //       TypeClass: SnackBarType[Notification.NotificationType],
-    //       data: Notification.data,
-    //       time: Notification.time,
-    //     });
-    //     this.table.renderRows();
-    //   },
-    // });
+    this.Subs.push(
+      this.store
+        .pipe(
+          select(LastDownloadedNotificationsSelector),
+          filter((event) => event !== undefined),
+          map((mass) => {
+            console.log('mass event');
+            console.log(mass);
+            this.DataArray = [
+              ...this.DataArray,
+              ...this.TransformInTableElement(mass),
+            ];
+          })
+        )
+        .subscribe()
+    );
+
+    this.store.dispatch(OpenNotificationsPageAction());
+  }
+
+  TransformInTableElement(
+    mass: MatSnackBarNotificationServer[]
+  ): TableElement[] {
+    return mass.map(
+      (elem): TableElement => ({
+        TypeClass: MatSnackBarType[elem.NotificationType],
+        data: elem.data,
+        time: elem.time,
+      })
+    );
   }
 
   ngOnDestroy(): void {
-    //console.log('destroy');
-    this.store.dispatch(CloseNotificationPage());
+    for (let sub of this.Subs) {
+      sub.unsubscribe();
+    }
+    this.store.dispatch(CloseNotificationPageAction());
   }
 }

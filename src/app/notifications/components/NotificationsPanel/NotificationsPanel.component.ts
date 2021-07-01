@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { NewNotificationAction } from '../../store/actions/notifications.actions';
 import { Observable } from 'rxjs';
-import { AreNewNotificationsSelector } from '../../store/reducers/notifications.reducer';
+import { AreNewNotificationsSelector } from '../../store/selectors/notifications.selector';
 
 @Component({
   selector: 'app-notifications-panel',

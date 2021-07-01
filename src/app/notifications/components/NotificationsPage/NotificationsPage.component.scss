@@ -1,3 +1,5 @@
+@import "/src/app/notifications/share/IconsTemplate.scss";
+
 .MatTable {
   width: 80%;
 }
@@ -7,32 +9,30 @@ $size: 30px;
 %IconTemplate {
   width: $size;
   height: $size;
-  background-size: contain;
   border: 0px;
 }
 
 .NewOrder {
   @extend %IconTemplate;
-  background: url(\src\app\notifications\assets\cart-plus-solid.svg) no-repeat top;
+  @extend %NewOrderIconTemplate;
 }
 
 .OrderChanged {
   @extend %IconTemplate;
-  background: url(\src\app\notifications\assets\sync-alt-solid.svg) no-repeat top;
+  @extend %OrderChangedIconTemplate;
 }
 
 .Warning {
   @extend %IconTemplate;
-  background: url(\src\app\notifications\assets\exclamation-triangle-solid.svg) no-repeat
-    top;
+  @extend %WarningIconTemplate;
 }
 
 .Error {
   @extend %IconTemplate;
-  background: url(\src\app\notifications\assets\minus-circle-solid.svg) no-repeat top;
+  @extend %ErrorIconTemplate;
 }
 
 .Info {
   @extend %IconTemplate;
-  background: url(\src\app\notifications\assets\info-solid.svg) no-repeat top;
+  @extend %InfoIconTemplate;
 }
