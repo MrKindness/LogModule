@@ -1,29 +1,12 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Store, select } from '@ngrx/store';
+import { MatTable } from '@angular/material/table';
+import { Store } from '@ngrx/store';
 import {
   CloseNotificationPageAction,
   OpenNotificationsPageAction,
 } from '../../store/actions/notifications.actions';
-import { filter, map, subscribeOn } from 'rxjs/operators';
-import {
-  MatSnackBarNotification,
-  MatSnackBarNotificationServer,
-  MatSnackBarType,
-} from '../../types/MatSnackBarType';
-import {
-  LastDownloadedNotificationsSelector,
-  NewNotificationSelector,
-  NotificationsSelector,
-} from '../../store/selectors/notifications.selector';
-import { Observable, Subscription } from 'rxjs';
-import { CollectionViewer, DataSource } from '@angular/cdk/collections';
-
-export interface TableElement {
-  TypeClass: string;
-  data: string;
-  time: number;
-}
+import { Subscription } from 'rxjs';
+import { TableViewDataSource } from '../../services/TableViewDataSource.service';
 
 @Component({
   selector: 'app-notifications-page-component',
@@ -32,63 +15,18 @@ export interface TableElement {
 })
 export class NotificationsPageComponent implements OnDestroy, OnInit {
   @ViewChild(MatTable, { static: true }) table: any;
-  DataArray: TableElement[] = [];
+  DataArray;
   displayedColumns: string[] = ['Icon', 'Data', 'Time'];
   Subs: Subscription[] = [];
 
   constructor(private store: Store) {}
+
   ngOnInit(): void {
-    this.Subs.push(
-      this.store
-        .pipe(
-          select(NewNotificationSelector),
-          filter((event) => event !== undefined),
-          map((notification) => {
-            this.DataArray = [
-              ...this.TransformInTableElement([notification]),
-              ...this.DataArray,
-            ];
-          })
-        )
-        .subscribe()
-    );
-
-    this.Subs.push(
-      this.store
-        .pipe(
-          select(LastDownloadedNotificationsSelector),
-          filter((event) => event !== undefined),
-          map((mass) => {
-            console.log('mass event');
-            console.log(mass);
-            this.DataArray = [
-              ...this.DataArray,
-              ...this.TransformInTableElement(mass),
-            ];
-          })
-        )
-        .subscribe()
-    );
-
+    this.DataArray = new TableViewDataSource(this.store);
     this.store.dispatch(OpenNotificationsPageAction());
   }
 
-  TransformInTableElement(
-    mass: MatSnackBarNotificationServer[]
-  ): TableElement[] {
-    return mass.map(
-      (elem): TableElement => ({
-        TypeClass: MatSnackBarType[elem.NotificationType],
-        data: elem.data,
-        time: elem.time,
-      })
-    );
-  }
-
   ngOnDestroy(): void {
-    for (let sub of this.Subs) {
-      sub.unsubscribe();
-    }
     this.store.dispatch(CloseNotificationPageAction());
   }
 }

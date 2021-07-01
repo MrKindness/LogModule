@@ -9,9 +9,6 @@ import {
 export interface NotificationsState {
   // Общее хранилище всех загруженных уведомлений
   NotificationsList: Array<MatSnackBarNotificationServer>;
-  // Необходимо для прокрутки, старые уведомления из истории, отдельный ключ чтобы не тянуть весь список целиком
-  LastDownloadedNotifications: Array<MatSnackBarNotificationServer>;
-  LastNewNotification: MatSnackBarNotificationServer;
   // Необходимо для отображения иконки непрочитанных уведомлений
   AreNewNotifications: boolean;
   // Необходимо чтобы помечать новые уведомления как прочитанные, если стараница уведомлений открыта
@@ -20,8 +17,6 @@ export interface NotificationsState {
 
 export const initialState: NotificationsState = {
   NotificationsList: [],
-  LastNewNotification: undefined,
-  LastDownloadedNotifications: [],
   AreNewNotifications: false,
   AreOpenedNotificationPage: false,
 };
@@ -33,7 +28,6 @@ export const NotificationsReducer = createReducer(
     (state, NewNotification: MatSnackBarNotificationServer) => {
       return {
         ...state,
-        LastNewNotification: NewNotification,
         NotificationsList: [NewNotification, ...state.NotificationsList],
         AreNewNotifications: state.AreOpenedNotificationPage ? false : true,
       };
@@ -46,7 +40,6 @@ export const NotificationsReducer = createReducer(
       return {
         ...state,
         NotificationsList: Notifications.array,
-        LastDownloadedNotifications: Notifications.array,
         AreNewNotifications: false,
         AreOpenedNotificationPage: true,
       };
