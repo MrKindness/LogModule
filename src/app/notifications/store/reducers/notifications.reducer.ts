@@ -2,8 +2,8 @@ import { createReducer, on } from '@ngrx/store';
 import { MatSnackBarNotificationServer } from '../../types/MatSnackBarType';
 import {
   CloseNotificationPageAction,
-  DownloadedInitializeNotifications,
   DownloadedNewNotificationAction,
+  DownloadedNotifications,
 } from '../actions/notifications.actions';
 
 export interface NotificationsState {
@@ -35,19 +35,28 @@ export const NotificationsReducer = createReducer(
   ),
   on(
     // данное событие всегда вызывается после открытия страницы уведомлений
-    DownloadedInitializeNotifications,
-    (state, Notifications: { array: MatSnackBarNotificationServer[] }) => {
+    DownloadedNotifications,
+    (
+      state,
+      Notifications: {
+        array: MatSnackBarNotificationServer[];
+        PageOpenedAction: boolean;
+      }
+    ) => {
       return {
         ...state,
-        NotificationsList: Notifications.array,
-        AreNewNotifications: false,
-        AreOpenedNotificationPage: true,
+        NotificationsList: Notifications.PageOpenedAction
+          ? [...Notifications.array, ...state.NotificationsList]
+          : [...state.NotificationsList, ...Notifications.array],
+        AreNewNotifications: Notifications.PageOpenedAction ? false : state.AreNewNotifications,
+        AreOpenedNotificationPage: Notifications.PageOpenedAction ? true : state.AreOpenedNotificationPage,
       };
     }
   ),
   on(CloseNotificationPageAction, (state) => {
     return {
       ...state,
+      NotificationsList: [],
       AreOpenedNotificationPage: false,
     };
   })

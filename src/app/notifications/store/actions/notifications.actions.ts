@@ -18,11 +18,16 @@ export const OpenNotificationsPageAction = createAction(
   '[NOTIFICATIONS] NotificationsPageOpened'
 );
 
-export const DownloadedInitializeNotifications = createAction(
-  '[NOTIFICATIONS] DownloadedInitializeNotificationsList',
-  props<{array: MatSnackBarNotificationServer[]}>()
+export const DownloadedNotifications = createAction(
+  '[NOTIFICATIONS] DownloadedNotificationsList',
+  props<{ array: MatSnackBarNotificationServer[], PageOpenedAction: boolean }>()
 );
 
 export const CloseNotificationPageAction = createAction(
   '[NOTIFICATIONS] NotificationPageClosed'
+);
+
+export const ScrollAction = createAction(
+  '[NOTIFICATIONS] ScrollEvent',
+  props<{end: number}>()
 );

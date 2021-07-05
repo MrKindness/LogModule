@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { MatSnackBarNotification } from '../types/MatSnackBarType';
+import {
+  MatSnackBarNotification,
+  MatSnackBarNotificationServer,
+} from '../types/MatSnackBarType';
 
 @Injectable()
 export class WebService {
@@ -13,14 +16,6 @@ export class WebService {
   }
 
   InitializeHistoryNotifications(amount: number) {
-    let data = {
-      params: {
-        _start: 0,
-        _limit: amount,
-        _sort: 'id',
-        _order: 'desc',
-      },
-    };
     // let data = {
     //   params: {
     //     _start: 24,
@@ -29,7 +24,6 @@ export class WebService {
     //     _order: 'desc',
     //   },
     // };
-    return this.http.get(this.url, data);
     // .pipe(
     //   map((mass: []) => {
     //     return mass.reverse;
@@ -37,5 +31,51 @@ export class WebService {
     // );
   }
 
-  getHistoryNotifications(start: number, amount: number) {}
+  getHistoryNotifications(start: number, amount: number) {
+    // if (start === undefined) {
+    //   let data = {
+    //     params: {
+    //       _start: 0,
+    //       _limit: amount,
+    //       _sort: 'id',
+    //       _order: 'desc',
+    //     },
+    //   };
+    //   return this.http.get(this.url, data);
+    // } else {
+    //   let data = {
+    //     params: {
+    //       _start: start - amount - 1 >= 0 ? start - amount - 1 : 0,
+    //       _limit: amount,
+    //       _sort: '',
+    //       _order: '',
+    //     },
+    //   };
+
+    //   return this.http
+    //     .get(this.url, data)
+    //     .pipe(map((mass: Array<MatSnackBarNotificationServer>) => mass.reverse()));
+
+    let data = {
+      params: {
+        _start:
+          start === undefined || start - amount - 1 < 0
+            ? 0
+            : start - amount - 1,
+        _limit: amount,
+        _sort: start === undefined ? 'id' : '',
+        _order: start === undefined ? 'desc' : '',
+      },
+    };
+
+    return this.http.get(this.url, data).pipe(
+      map((mass: Array<MatSnackBarNotificationServer>) => {
+        if (start === undefined) {
+          return mass;
+        } else {
+          return mass.reverse();
+        }
+      })
+    );
+  }
 }

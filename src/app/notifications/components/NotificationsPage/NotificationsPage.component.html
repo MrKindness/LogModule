@@ -1,26 +1,26 @@
-<table #table mat-table [dataSource]="DataArray" class="MatTable">
+<mat-table [dataSource]="DataArray" class="MatTable">
   <ng-container matColumnDef="Icon">
-    <th mat-header-cell *matHeaderCellDef>Type</th>
-    <td mat-cell *matCellDef="let notification">
+    <mat-header-cell *matHeaderCellDef>Type</mat-header-cell>
+    <mat-cell *matCellDef="let notification">
       <div [ngClass]="notification.TypeClass">
       </div>
-    </td>
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="Data">
-    <th mat-header-cell *matHeaderCellDef>Data</th>
-    <td mat-cell *matCellDef="let notification">
+    <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+    <mat-cell *matCellDef="let notification">
       {{ notification.data }}
-    </td>
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="Time">
-    <th mat-header-cell *matHeaderCellDef>Time</th>
-    <td mat-cell *matCellDef="let notification">
+    <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
+    <mat-cell *matCellDef="let notification">
       {{ notification.time | date: "HH:mm:SSS dd.MM.YYYY" }}
-    </td>
+    </mat-cell>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

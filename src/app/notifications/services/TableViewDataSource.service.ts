@@ -23,9 +23,7 @@ export class TableViewDataSource extends DataSource<TableElement> {
     return this.dataStream;
   }
 
-  disconnect(collectionViewer: CollectionViewer): void {
-    console.log('disconenct tableviewdataSource');
-  }
+  disconnect(collectionViewer: CollectionViewer): void {}
 
   TransformInTableElement(
     mass: MatSnackBarNotificationServer[]

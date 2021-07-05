@@ -30,7 +30,7 @@ export class NotificationsPanelComponent implements OnDestroy {
     this.AreNewNotifications$ = this.store.pipe(
       select(AreNewNotificationsSelector)
     );
-    this.EventserviceSub$ = this.EventService.NewNotication.subscribe({
+    this.EventserviceSub$ = this.EventService.NewNotification.subscribe({
       next: (notification: MatSnackBarNotification) => {
         this.store.dispatch(NewNotificationAction(notification));
         this.SnackBar.openFromComponent(MatSnackBarComponent, {
