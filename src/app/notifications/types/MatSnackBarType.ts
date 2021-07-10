@@ -16,13 +16,14 @@ export interface TableElement {
   TypeClass: string;
   data: string;
   time: number;
+  id: string;
 }
 
 export interface MatSnackBarNotificationServer {
   NotificationType: MatSnackBarType;
   data: string;
   time: number;
-  id: number;
+  id: string;
 }
 
 export interface MatSnackBarArray {

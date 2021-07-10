@@ -29,5 +29,6 @@ export const CloseNotificationPageAction = createAction(
 
 export const ScrollAction = createAction(
   '[NOTIFICATIONS] ScrollEvent',
-  props<{end: number}>()
+  props<{ LastNotificationId: string, LastNotificationTime: number }>()
 );
+

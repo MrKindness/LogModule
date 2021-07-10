@@ -46,11 +46,10 @@
               ],
               "optimization": false,
               "outputHashing": "none",
-              "sourceMap": true,
               "namedChunks": false,
               "extractLicenses": false,
               "vendorChunk": false,
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -72,7 +71,7 @@
             "browserTarget": "LogModule:build",
             "sourceMap": {
               "scripts": true,
-              "styles": true,
+              "styles": false,
               "vendor": true
             }
           },

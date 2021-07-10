@@ -1,5 +1,8 @@
 import { createReducer, on } from '@ngrx/store';
-import { MatSnackBarNotificationServer } from '../../types/MatSnackBarType';
+import {
+  MatSnackBarNotification,
+  MatSnackBarNotificationServer,
+} from '../../types/MatSnackBarType';
 import {
   CloseNotificationPageAction,
   DownloadedNewNotificationAction,
@@ -39,17 +42,21 @@ export const NotificationsReducer = createReducer(
     (
       state,
       Notifications: {
-        array: MatSnackBarNotificationServer[];
-        PageOpenedAction: boolean;
+        array: MatSnackBarNotificationServer[],
+        PageOpenedAction: boolean,
       }
     ) => {
       return {
         ...state,
         NotificationsList: Notifications.PageOpenedAction
-          ? [...Notifications.array, ...state.NotificationsList]
+          ? [...Notifications.array]
           : [...state.NotificationsList, ...Notifications.array],
-        AreNewNotifications: Notifications.PageOpenedAction ? false : state.AreNewNotifications,
-        AreOpenedNotificationPage: Notifications.PageOpenedAction ? true : state.AreOpenedNotificationPage,
+        AreNewNotifications: Notifications.PageOpenedAction
+          ? false
+          : state.AreNewNotifications,
+        AreOpenedNotificationPage: Notifications.PageOpenedAction
+          ? true
+          : state.AreOpenedNotificationPage,
       };
     }
   ),

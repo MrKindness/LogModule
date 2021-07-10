@@ -7,6 +7,13 @@
     </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="Id">
+    <mat-header-cell *matHeaderCellDef>Id</mat-header-cell>
+    <mat-cell *matCellDef="let notification">
+      {{ notification.id }}
+    </mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="Data">
     <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
     <mat-cell *matCellDef="let notification">
@@ -17,7 +24,7 @@
   <ng-container matColumnDef="Time">
     <mat-header-cell *matHeaderCellDef>Time</mat-header-cell>
     <mat-cell *matCellDef="let notification">
-      {{ notification.time | date: "HH:mm:SSS dd.MM.YYYY" }}
+      {{ notification.time | date: "HH:mm:ss dd.MM.YYYY" }}
     </mat-cell>
   </ng-container>
 

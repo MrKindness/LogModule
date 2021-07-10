@@ -2,7 +2,7 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NotificationsSelector } from '../store/selectors/notifications.selector';
-import { MatSnackBarNotificationServer, MatSnackBarType, TableElement } from '../types/MatSnackBarType';
+import { MatSnackBarNotification, MatSnackBarNotificationServer, MatSnackBarType, TableElement } from '../types/MatSnackBarType';
 import { Store, select } from '@ngrx/store';
 
 export class TableViewDataSource extends DataSource<TableElement> {
@@ -33,6 +33,7 @@ export class TableViewDataSource extends DataSource<TableElement> {
         TypeClass: MatSnackBarType[elem.NotificationType],
         data: elem.data,
         time: elem.time,
+        id: elem.id,
       })
     );
   }

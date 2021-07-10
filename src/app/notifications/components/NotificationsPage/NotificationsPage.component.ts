@@ -8,8 +8,11 @@ import {
 } from '../../store/actions/notifications.actions';
 import { fromEvent, pipe, Subscription } from 'rxjs';
 import { TableViewDataSource } from '../../services/TableViewDataSource.service';
-import { auditTime, map } from 'rxjs/operators';
-import { MatSnackBarNotificationServer } from '../../types/MatSnackBarType';
+import { auditTime, distinctUntilChanged, map } from 'rxjs/operators';
+import {
+  MatSnackBarNotification,
+  MatSnackBarNotificationServer,
+} from '../../types/MatSnackBarType';
 import { NotificationsSelector } from '../../store/selectors/notifications.selector';
 
 @Component({
@@ -19,25 +22,24 @@ import { NotificationsSelector } from '../../store/selectors/notifications.selec
 })
 export class NotificationsPageComponent implements OnDestroy, OnInit {
   @ViewChild(MatTable, { static: true }) table: any;
-  displayedColumns: string[] = ['Icon', 'Data', 'Time'];
-  Subs: Subscription[] = [];
+  displayedColumns: string[] = ['Icon', 'Id', 'Data', 'Time'];
   DataArray: TableViewDataSource;
   NotificationsSub;
   LatestNotificationInstance: MatSnackBarNotificationServer;
   NewsestNotificationInstance: MatSnackBarNotificationServer;
-
   constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.DataArray = new TableViewDataSource(this.store);
-    this.store.dispatch(OpenNotificationsPageAction());
 
     this.NotificationsSub = this.store
       .pipe(
         select(NotificationsSelector),
-        map((event) => {
+        map((event: any) => {
           this.NewsestNotificationInstance = event[0];
           this.LatestNotificationInstance = event[event.length - 1];
+          //console.log('latest:');
+          //console.log(this.LatestNotificationInstance);
         })
       )
       .subscribe();
@@ -51,11 +53,17 @@ export class NotificationsPageComponent implements OnDestroy, OnInit {
             e.target.scrollTop + e.target.offsetHeight + buffer >=
             e.target.scrollHeight
           ) {
-            this.store.dispatch(ScrollAction({end: this.LatestNotificationInstance.id}));
+            this.store.dispatch(
+              ScrollAction({
+                LastNotificationId: this.LatestNotificationInstance.id,
+                LastNotificationTime: this.LatestNotificationInstance.time,
+              })
+            );
           }
         })
       )
-      .subscribe();
+
+    this.store.dispatch(OpenNotificationsPageAction());
   }
 
   ngOnDestroy(): void {
