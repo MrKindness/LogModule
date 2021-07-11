@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import {
   MatSnackBarNotification,
-  MatSnackBarNotificationServer,
 } from '../../types/MatSnackBarType';
 import {
   CloseNotificationPageAction,
@@ -11,7 +10,7 @@ import {
 
 export interface NotificationsState {
   // Общее хранилище всех загруженных уведомлений
-  NotificationsList: Array<MatSnackBarNotificationServer>;
+  NotificationsList: Array<MatSnackBarNotification>;
   // Необходимо для отображения иконки непрочитанных уведомлений
   AreNewNotifications: boolean;
   // Необходимо чтобы помечать новые уведомления как прочитанные, если стараница уведомлений открыта
@@ -28,7 +27,7 @@ export const NotificationsReducer = createReducer(
   initialState,
   on(
     DownloadedNewNotificationAction,
-    (state, NewNotification: MatSnackBarNotificationServer) => {
+    (state, NewNotification: MatSnackBarNotification) => {
       return {
         ...state,
         NotificationsList: [NewNotification, ...state.NotificationsList],
@@ -42,7 +41,7 @@ export const NotificationsReducer = createReducer(
     (
       state,
       Notifications: {
-        array: MatSnackBarNotificationServer[],
+        array: MatSnackBarNotification[],
         PageOpenedAction: boolean,
       }
     ) => {

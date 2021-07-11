@@ -2,10 +2,10 @@ import { CollectionViewer, DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NotificationsSelector } from '../store/selectors/notifications.selector';
-import { MatSnackBarNotification, MatSnackBarNotificationServer, MatSnackBarType, TableElement } from '../types/MatSnackBarType';
+import { MatSnackBarNotification, MatSnackBarType } from '../types/MatSnackBarType';
 import { Store, select } from '@ngrx/store';
 
-export class TableViewDataSource extends DataSource<TableElement> {
+export class TableViewDataSource extends DataSource<MatSnackBarNotification> {
   constructor(private store: Store) {
     super();
   }
@@ -13,24 +13,28 @@ export class TableViewDataSource extends DataSource<TableElement> {
   private dataStream = this.store.pipe(
     select(NotificationsSelector),
     map((mass) => {
+      console.log(mass);
+      console.log(this.TransformInTableElement(mass));
       return [...this.TransformInTableElement(mass)];
     })
   );
 
   connect(
     collectionViewer: CollectionViewer
-  ): Observable<TableElement[] | readonly TableElement[]> {
+  ): Observable<
+    MatSnackBarNotification[] | readonly MatSnackBarNotification[]
+  > {
     return this.dataStream;
   }
 
   disconnect(collectionViewer: CollectionViewer): void {}
 
   TransformInTableElement(
-    mass: MatSnackBarNotificationServer[]
-  ): TableElement[] {
+    mass: MatSnackBarNotification[]
+  ): MatSnackBarNotification[] {
     return mass.map(
-      (elem): TableElement => ({
-        TypeClass: MatSnackBarType[elem.NotificationType],
+      (elem): MatSnackBarNotification => ({
+        NotificationType: MatSnackBarType[elem.NotificationType],
         data: elem.data,
         time: elem.time,
         id: elem.id,

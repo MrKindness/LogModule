@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import {
   MatSnackBarNotification,
-  MatSnackBarNotificationServer,
 } from '../types/MatSnackBarType';
 
 @Injectable()
@@ -13,22 +12,6 @@ export class WebService {
 
   PostNewNotification(data: MatSnackBarNotification) {
     return this.http.post(this.url, data);
-  }
-
-  InitializeHistoryNotifications(amount: number) {
-    // let data = {
-    //   params: {
-    //     _start: 24,
-    //     _end: 45,
-    //     _sort: 'id',
-    //     _order: 'desc',
-    //   },
-    // };
-    // .pipe(
-    //   map((mass: []) => {
-    //     return mass.reverse;
-    //   })
-    // );
   }
 
   getHistoryNotifications(start: number, amount: number) {
@@ -69,7 +52,7 @@ export class WebService {
     };
 
     return this.http.get(this.url, data).pipe(
-      map((mass: Array<MatSnackBarNotificationServer>) => {
+      map((mass: Array<MatSnackBarNotification>) => {
         if (start === undefined) {
           return mass;
         } else {

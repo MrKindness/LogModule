@@ -17,6 +17,7 @@ export class TestComponent {
     NotificationType: 0,
     time: 0,
     data: '',
+    id: undefined
   };
 
   NewOrderClick(): void {

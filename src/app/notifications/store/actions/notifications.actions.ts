@@ -1,7 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import {
   MatSnackBarNotification,
-  MatSnackBarNotificationServer,
 } from '../../types/MatSnackBarType';
 
 export const NewNotificationAction = createAction(
@@ -11,7 +10,7 @@ export const NewNotificationAction = createAction(
 
 export const DownloadedNewNotificationAction = createAction(
   '[NOTIFICATIONS] DownloadedNewNotificationAction',
-  props<MatSnackBarNotificationServer>()
+  props<MatSnackBarNotification>()
 );
 
 export const OpenNotificationsPageAction = createAction(
@@ -20,7 +19,7 @@ export const OpenNotificationsPageAction = createAction(
 
 export const DownloadedNotifications = createAction(
   '[NOTIFICATIONS] DownloadedNotificationsList',
-  props<{ array: MatSnackBarNotificationServer[], PageOpenedAction: boolean }>()
+  props<{ array: MatSnackBarNotification[], PageOpenedAction: boolean }>()
 );
 
 export const CloseNotificationPageAction = createAction(

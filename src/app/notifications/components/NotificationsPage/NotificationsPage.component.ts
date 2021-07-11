@@ -1,19 +1,20 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTable } from '@angular/material/table';
+
 import { Store, select } from '@ngrx/store';
+
+import { fromEvent } from 'rxjs';
+import { auditTime, map } from 'rxjs/operators';
+
 import {
   CloseNotificationPageAction,
   OpenNotificationsPageAction,
   ScrollAction,
 } from '../../store/actions/notifications.actions';
-import { fromEvent, pipe, Subscription } from 'rxjs';
-import { TableViewDataSource } from '../../services/TableViewDataSource.service';
-import { auditTime, distinctUntilChanged, map } from 'rxjs/operators';
-import {
-  MatSnackBarNotification,
-  MatSnackBarNotificationServer,
-} from '../../types/MatSnackBarType';
 import { NotificationsSelector } from '../../store/selectors/notifications.selector';
+
+import { TableViewDataSource } from '../../services/TableViewDataSource.service';
+import { MatSnackBarNotification } from '../../types/MatSnackBarType';
 
 @Component({
   selector: 'app-notifications-page-component',
@@ -25,8 +26,8 @@ export class NotificationsPageComponent implements OnDestroy, OnInit {
   displayedColumns: string[] = ['Icon', 'Id', 'Data', 'Time'];
   DataArray: TableViewDataSource;
   NotificationsSub;
-  LatestNotificationInstance: MatSnackBarNotificationServer;
-  NewsestNotificationInstance: MatSnackBarNotificationServer;
+  LatestNotificationInstance: MatSnackBarNotification;
+  NewsestNotificationInstance: MatSnackBarNotification;
   constructor(private store: Store) {}
 
   ngOnInit(): void {
@@ -38,8 +39,6 @@ export class NotificationsPageComponent implements OnDestroy, OnInit {
         map((event: any) => {
           this.NewsestNotificationInstance = event[0];
           this.LatestNotificationInstance = event[event.length - 1];
-          //console.log('latest:');
-          //console.log(this.LatestNotificationInstance);
         })
       )
       .subscribe();
@@ -62,6 +61,7 @@ export class NotificationsPageComponent implements OnDestroy, OnInit {
           }
         })
       )
+      .subscribe();
 
     this.store.dispatch(OpenNotificationsPageAction());
   }

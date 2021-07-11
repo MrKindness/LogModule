@@ -7,36 +7,20 @@ export enum MatSnackBarType {
 }
 
 export interface MatSnackBarNotification {
-  NotificationType: MatSnackBarType;
-  data: string;
-  time: number;
-}
-
-export interface TableElement {
-  TypeClass: string;
+  NotificationType: MatSnackBarType | string;
   data: string;
   time: number;
   id: string;
 }
 
-export interface MatSnackBarNotificationServer {
-  NotificationType: MatSnackBarType;
-  data: string;
-  time: number;
-  id: string;
-}
-
-export interface MatSnackBarArray {
-  array: MatSnackBarNotification[];
-}
-
-interface MatSnackBarInfo {
-  TextColor: number[];
-  BackgroundColor: number[];
-  IconPath: string;
-}
-
-export const MatSnackBarData = new Map<number, MatSnackBarInfo>([
+export const MatSnackBarData = new Map<
+  number,
+  {
+    TextColor: number[];
+    BackgroundColor: number[];
+    IconPath: string;
+  }
+>([
   [
     MatSnackBarType.Error,
     {
